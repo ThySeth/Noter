@@ -1,0 +1,15 @@
+.noteHead {
+    margin-left: 10px;
+    font-size: larger;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+form .div{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+footer {
+    position:sticky;
+    bottom: 10px;
+    width: 5%;
+}
