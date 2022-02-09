@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="styles.css">
+
+<body>
+
+    <header class="noteHead">Noter Sample</header>
+    <hr style="color: black;box-shadow: 5px;">
+     <form id="formA">
+         <div>
+             Splice
+         </div>
+         <hr>
+         <div>
+             Dice
+         </div>
+         <hr>
+
+     </form>
+
+</body>
+
+<footer>
+    <input type="text" id="inputer">
+    <script>
+        let into = document.getElementById("inputer");
+        into.addEventListener("keyup", (event) => {
+            if(event.keyCode == 13) {
+             if((into.value).length == 0) return;
+                console.log(into.value);
+                 let element = document.getElementById("formA");
+                 let newDiv = document.createElement("div"); // Creates empty <div>
+                 let text = document.createTextNode(into.value); // Creates text to be added to <div>
+                  newDiv.appendChild(text); // Constructs <div> with text
+                   element.appendChild(newDiv); // Visualizes <div> with text node
+                   element.appendChild(document.createElement("hr")); // Creates divider per item
+                    into.value = ""; // Wipes text input
+            }
+        })
+    </script>
+</footer>
