@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="styles.css">
 
-<body>
+<header class="noteHead">
+    <li class="current">
+        <a href="#">Notepad</a>
+    </li>
+    <li>
+        <a href="#">Calc.</a>
+    </li>
+</header>
 
-    <header class="noteHead">Noter Sample</header>
+<body style="color:white;">
     <hr style="color: black;box-shadow: 5px;">
      <form id="formA">
-         <div>
-             Splice
-         </div>
-         <hr>
-         <div>
-             Dice
-         </div>
-         <hr>
-
+        <!-- divs here -->
      </form>
 
 </body>
@@ -29,7 +28,7 @@
                 console.log(into.value);
                  let element = document.getElementById("formA");
                  let newDiv = document.createElement("div"); // Creates empty <div>
-                 let text = document.createTextNode(into.value); // Creates text to be added to <div>
+                 let text = document.createTextNode("• "+into.value); // Creates text to be added to <div>
                   newDiv.appendChild(text); // Constructs <div> with text
                    element.appendChild(newDiv); // Visualizes <div> with text node
                    element.appendChild(document.createElement("hr")); // Creates divider per item
