@@ -8,8 +8,36 @@ form .div{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+body {
+    background-color: #08092c;
+}
+
 footer {
     position:sticky;
     bottom: 10px;
     width: 5%;
+}
+
+header {
+    display:flex;
+    justify-content:space-around;
+    align-items: center;
+    min-height: 5vh;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header a:hover {
+    color:rgb(150, 150, 150);
+}
+
+li {
+    list-style: none;
+    font-size: 25px;
+    width: 30%;
+    justify-content: space-around;
+}
+
+li a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
 }
