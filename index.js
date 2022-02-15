@@ -1,9 +1,9 @@
-const {app, BrowserWindow, contextBridge} = require("electron");
+const {app, BrowserWindow} = require("electron");
 
 async function winCreate() {
     let window = new BrowserWindow({
         width: 300,
-        height: 400
+        height: 400,
     })
     
     window.loadFile("main.html");
