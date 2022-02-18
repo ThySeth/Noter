@@ -8,10 +8,6 @@ form .div{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body {
-    background-color: #08092c;
-}
-
 footer {
     position:sticky;
     bottom: 10px;
@@ -27,7 +23,7 @@ header {
 }
 
 header a:hover {
-    color:rgb(150, 150, 150);
+    color:rgb(53, 53, 53);
 }
 
 li {
@@ -39,5 +35,5 @@ li {
 
 li a{
     text-decoration: none;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
 }
