@@ -12,28 +12,49 @@
 
 <body style="color:white;">
     <hr style="color: black;box-shadow: 5px;">
-     <form id="formA">
+     <form id="formA" style="color: black">
         <!-- divs here -->
      </form>
 
 </body>
 
 <footer>
-    <input type="text" id="inputer">
+    <input type="text" id="inputer" autofocus>
     <script>
+        // Input sender to NodeJS module
+      const {ipcRenderer} = require("electron");
+      function sender(text) {
+        ipcRenderer.send("note:new", text);
+      }
         let into = document.getElementById("inputer");
         into.addEventListener("keyup", (event) => {
             if(event.keyCode == 13) {
              if((into.value).length == 0) return;
-                console.log(into.value);
                  let element = document.getElementById("formA");
                  let newDiv = document.createElement("div"); // Creates empty <div>
                  let text = document.createTextNode("• "+into.value); // Creates text to be added to <div>
                   newDiv.appendChild(text); // Constructs <div> with text
                    element.appendChild(newDiv); // Visualizes <div> with text node
                    element.appendChild(document.createElement("hr")); // Creates divider per item
+                   sender(into.value);
                     into.value = ""; // Wipes text input
             }
         })
+    </script>
+    <script>
+        // Startup reciever from NodeJS module
+            function receiver(text) {
+             if(text.length == 0) return;
+              let element = document.getElementById("formA");
+               let newDiv = document.createElement("div");
+                let txt = document.createTextNode(`• ${text}`);
+                 newDiv.appendChild(txt);
+                  element.appendChild(newDiv);
+                   element.appendChild(document.createElement("hr"));
+            }
+            ipcRenderer.on("note:startup", function(e, note) {
+              console.log(note);
+                receiver(note);
+            })
     </script>
 </footer>
