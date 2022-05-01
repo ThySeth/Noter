@@ -5,22 +5,28 @@
     <li class="current">
         <a href="#">Notepad</a>
     </li>
-    <li>
-        <a href="#">Calc.</a>
-    </li>
 </header>
 
 <body style="color:white;">
     <hr style="color: black;box-shadow: 5px;">
-     <form id="formA" style="color: black">
+     <form id="formA" style="color: black;">
         <!-- divs here -->
      </form>
-
 </body>
 
 <footer>
     <input type="text" id="inputer" autofocus>
     <script>
+     function getID(callback) {
+        ipcRenderer.send("note:get", "id");
+        ipcRenderer.on("note:get", function(e, end) {
+          if(end == 400) {
+              console.error("400 Bad Request");
+          } else {
+            callback(end);
+          }
+        })
+     }
         // Input sender to NodeJS module
       const {ipcRenderer} = require("electron");
       function sender(text) {
@@ -32,25 +38,35 @@
              if((into.value).length == 0) return;
                  let element = document.getElementById("formA");
                  let newDiv = document.createElement("div"); // Creates empty <div>
-                 let text = document.createTextNode("• "+into.value); // Creates text to be added to <div>
+                 let text = document.createTextNode("\n• "+into.value); // Creates text to be added to <div>
                   newDiv.appendChild(text); // Constructs <div> with text
                    element.appendChild(newDiv); // Visualizes <div> with text node
-                   element.appendChild(document.createElement("hr")); // Creates divider per item
+                   //element.appendChild(document.createElement("hr")); // Creates divider per item
                    sender(into.value);
                     into.value = ""; // Wipes text input
             }
         })
+
+        document.addEventListener("dblclick", function(event) { //event.target.innerHTML
+            console.log(event.target.innerHTML);
+            let inner = (event.target.innerHTML).slice(3, (event.target.innerHTML).length);
+             ipcRenderer.send("note:get-note", inner);
+              ipcRenderer.on("note:get-note", function(e, result) {
+                  console.log("note ID: " + result)
+                   event.target.remove();
+              })
+        })
+
     </script>
     <script>
-        // Startup reciever from NodeJS module
+        // Startup receiver from NodeJS module
             function receiver(text) {
              if(text.length == 0) return;
               let element = document.getElementById("formA");
                let newDiv = document.createElement("div");
-                let txt = document.createTextNode(`• ${text}`);
+                let txt = document.createTextNode(`\n• ${text}`);
                  newDiv.appendChild(txt);
                   element.appendChild(newDiv);
-                   element.appendChild(document.createElement("hr"));
             }
             ipcRenderer.on("note:startup", function(e, note) {
               console.log(note);
